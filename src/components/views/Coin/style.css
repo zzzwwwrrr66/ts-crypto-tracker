@@ -1,0 +1,21 @@
+.infoContainer {
+  display: flex;
+  color: green;
+  justify-content: space-between;
+}
+
+.tabWrap {
+  display: flex;
+  width: 500px;
+  padding: 10px 0 ;
+  margin: 0 auto;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+.tabWrap a {
+  margin: 0 15px 0;
+}
+
+a.active { 
+  color: green;
+}
