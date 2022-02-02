@@ -7,10 +7,10 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path='/' component={Coins} exact={true} ></Route>
+        <Route path='/ts-crypto-tracker' component={Coins} exact={true} ></Route>
       </Switch>
       <Switch>
-        <Route path='/:id' component={CoinDetail} ></Route>
+        <Route path='/ts-crypto-tracker/:id' component={CoinDetail} ></Route>
       </Switch>
     </BrowserRouter>
   );

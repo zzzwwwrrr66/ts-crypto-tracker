@@ -75,14 +75,14 @@ const CoinDetail = () => {
               <p>max supply: {dataPrice?.max_supply}</p>
             </div>
             <div className={`tabWrap`}>
-              <Link to={`/${params.id}/chart`} className={isChart ? 'active' : ''}>chart page</Link>
-              <Link to={`/${params.id}/price`} className={isPrice ? 'active' : ''}>price page</Link>
+              <Link to={`/ts-crypto-tracker/${params.id}/chart`} className={isChart ? 'active' : ''}>chart page</Link>
+              <Link to={`/ts-crypto-tracker/${params.id}/price`} className={isPrice ? 'active' : ''}>price page</Link>
             </div>
             <Switch>
-              <Route path={`/${params.id}/chart`}>
+              <Route path={`/ts-crypto-tracker/${params.id}/chart`}>
                 <DetailChart coinId={params.id}/>
               </Route>
-              <Route path={`/${params.id}/price`} >
+              <Route path={`/ts-crypto-tracker/${params.id}/price`} >
                 <DetailPrice/>
               </Route>
             </Switch>

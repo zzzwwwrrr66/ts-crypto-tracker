@@ -39,7 +39,7 @@ const Coins = () => {
             data?.slice(0,99).map((v, i)=>{
               return((
                 <li key={v.id}>
-                  <Link to={`/${v.id}`}>{v.id}</Link>
+                  <Link to={`/ts-crypto-tracker/${v.id}`}>{v.id}</Link>
                 </li>
               ))
             })
