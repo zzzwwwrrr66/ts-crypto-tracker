@@ -10,6 +10,7 @@ import "./style.css";
 
 import DetailPrice from './DetailPrice';
 import DetailChart from './DetailChart';
+import { Helmet } from 'react-helmet';
 
 
 const CoinDetail = () => {
@@ -24,9 +25,12 @@ const CoinDetail = () => {
     ['detail', params.id], 
     () => getCoinsDetail(params.id)
   );
-  const { isLoading : loadingPrice , data: dataDPrice} = useQuery<ITicker>(
+  const { isLoading : loadingPrice , data: dataPrice} = useQuery<ITicker>(
     ['price', params.id], 
-    () => getPrice(params.id)
+    () => getPrice(params.id),
+    {
+      refetchInterval: 5000,
+    }
   );
   const isLoading = loadingDetail && loadingPrice;
   // useEffect(()=>{
@@ -47,7 +51,11 @@ const CoinDetail = () => {
 
   return(
     <>
+    <Helmet>
+      <title>{params.id}</title>
+    </Helmet>
       <h1>Coin : {params.id} </h1>
+      <Link to='/'>Home</Link>
       {
         isLoading ? (
           <p>loading...</p>
@@ -58,23 +66,24 @@ const CoinDetail = () => {
             <div className='infoContainer'>
               <p>RANK: {dataDetail?.rank}</p>
               <p>symbol: {dataDetail?.symbol}</p>
-              <p>open_source: {dataDetail?.open_source ? (<div>true</div>) : (<div>false</div>)}</p>
+              <span>Price:</span>
+              <span>${dataPrice?.quotes.USD.price.toFixed(3)}</span>
             </div>
             <p>{dataDetail?.description}</p>
             <div className='infoContainer'>
-              <p>total supply: {dataDPrice?.total_supply}</p>
-              <p>max supply: {dataDPrice?.max_supply}</p>
+              <p>total supply: {dataPrice?.total_supply}</p>
+              <p>max supply: {dataPrice?.max_supply}</p>
             </div>
             <div className={`tabWrap`}>
-              <Link to={`/${params.id}/price`} className={isPrice ? 'active' : ''}>price page</Link>
               <Link to={`/${params.id}/chart`} className={isChart ? 'active' : ''}>chart page</Link>
+              <Link to={`/${params.id}/price`} className={isPrice ? 'active' : ''}>price page</Link>
             </div>
             <Switch>
+              <Route path={`/${params.id}/chart`}>
+                <DetailChart coinId={params.id}/>
+              </Route>
               <Route path={`/${params.id}/price`} >
                 <DetailPrice/>
-              </Route>
-              <Route path={`/${params.id}/chart`}>
-                <DetailChart/>
               </Route>
             </Switch>
           </div>

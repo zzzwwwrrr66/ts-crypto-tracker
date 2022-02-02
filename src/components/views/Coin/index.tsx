@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import {IDatas} from './Types';
 
 import {useQuery} from 'react-query';
-import { getCoins } from '../../../api'
+import { getCoins } from '../../../api';
+
+import { Helmet } from 'react-helmet';
 
 const Coins = () => {
   // const [datas, setDatas] = useState<IDatas[]>();
   // const [loading, setLoading] = useState(false);
 
-  const { isLoading, data} = useQuery<IDatas[]>('allCoins', getCoins);
+  const { isLoading, data} = useQuery<IDatas[]>(['allCoins'], getCoins);
   
   /* useEffect(()=>{
     console.log('query loading ',isLoading, 'query data', data, )
@@ -25,6 +27,9 @@ const Coins = () => {
 
   return(
     <>
+    <Helmet>
+      <title>Coins</title>
+    </Helmet>
       <h1>Coins</h1>
       <ul>
         {
